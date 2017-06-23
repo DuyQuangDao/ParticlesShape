@@ -32,7 +32,7 @@ class ParticleCommand extends PluginCommand{
 	return;
 	}
 	
-	$shapes = ["helix", "crown", "cloud", "dhelix", "laser"];
+	$shapes = ["helix", "crown", "cloud", "dhelix", "laser", "dring", "tornado"];
 	
 	if(!isset($args[0])){
 	$sender->sendMessage(Loader::PREFIX.TextFormat::RED." Use /particles <add [particle] [name]> | <remove [name]");
@@ -66,6 +66,10 @@ class ParticleCommand extends PluginCommand{
 	$sender->sendMessage(Loader::PREFIX.TextFormat::RED." You need to use letters instance of numbers");
 	return;
 	}
+	if($this->getPlugin()->existsTask($name)){
+	$sender->sendMessage(Loader::PREFIX.TextFormat::RED." This name is already taken, plase choose another one");
+	return;
+	}
 	switch($shape){
 	case "helix":
 	$this->getPlugin()->newHelix($sender->getLocation(), $sender->getLevel(), $name);
@@ -81,6 +85,12 @@ class ParticleCommand extends PluginCommand{
 	break;
 	case "laser":
 	$this->getPlugin()->newLaser($sender, $name);
+	break;
+	case "dring":
+	$this->getPlugin()->newDring($sender->getLocation(), $sender->getLevel(), $name);
+	break;
+	case "tornado":
+	$this->getPlugin()->newTornado($sender->getLocation(), $sender->getLevel(), $name);
 	break;
 	}
 	$sender->sendMessage(Loader::PREFIX.TextFormat::GRAY." You spawned a new particle called: ".TextFormat::GREEN.$name.TextFormat::GRAY.", shape: ".TextFormat::GREEN.$shape);
