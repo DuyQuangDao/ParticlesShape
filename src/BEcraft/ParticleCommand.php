@@ -32,7 +32,7 @@ class ParticleCommand extends PluginCommand{
 	return;
 	}
 	
-	$shapes = ["helix", "crown", "cloud", "dhelix", "laser", "dring", "tornado", "party"];
+	$shapes = ["helix", "crown", "cloud", "dhelix", "laser", "dring", "tornado", "party", "edita"];
 	
 	if(!isset($args[0])){
 	$sender->sendMessage(Loader::PREFIX.TextFormat::RED." Use /particles <add [particle] [name]> | <remove [name]");
@@ -94,6 +94,9 @@ class ParticleCommand extends PluginCommand{
 	break;
 	case "party":
 	$this->getPlugin()->newParty($sender->getLocation(), $sender->getLevel(), $name);
+	break;
+	case "edita":
+	$this->getPlugin()->newEdita($sender->getLocation(), $sender->getLevel(), $name);
 	break;
 	}
 	$sender->sendMessage(Loader::PREFIX.TextFormat::GRAY." You spawned a new particle called: ".TextFormat::GREEN.$name.TextFormat::GRAY.", shape: ".TextFormat::GREEN.$shape);

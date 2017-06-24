@@ -5,7 +5,7 @@ namespace BEcraft;
 use pocketmine\{Server, Player};
 use pocketmine\plugin\PluginBase;
 use pocketmine\level\{Level, Position, Location};
-use BEcraft\Tasks\{DoubleHelix, Crown, CloudRain, Laser, Helix, Dring, Tornado, Party};
+use BEcraft\Tasks\{DoubleHelix, Crown, CloudRain, Laser, Helix, Dring, Tornado, Party, Edita};
 use BEcraft\ParticleCommand;
 use pocketmine\utils\TextFormat;
 
@@ -47,6 +47,11 @@ class Loader extends PluginBase{
 	
 	public function newCrown(Location $location, Level $level, $name){
 	$this->getServer()->getScheduler()->scheduleRepeatingTask($task = new Crown($this, $location, $level), 5);
+	$this->tasks[$name] = $task->getTaskId();
+	}
+	
+	public function newEdita(Location $location, Level $level, $name){
+	$this->getServer()->getScheduler()->scheduleRepeatingTask($task = new Edita($this, $location, $level), 10);
 	$this->tasks[$name] = $task->getTaskId();
 	}
 	
